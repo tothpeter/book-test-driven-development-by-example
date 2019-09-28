@@ -14,9 +14,15 @@ public class MoneyTest {
 	
 	@Test
 	public void testEquality() {
-		 assertTrue(Money.dollar(5).equals( Money.dollar(5) ));
-		 assertFalse(Money.dollar(5).equals( Money.dollar(6) ));
-		 assertFalse(Money.dollar(5).equals( Money.franc(5) ));
+		assertTrue(Money.dollar(5).equals( Money.dollar(5) ));
+		assertFalse(Money.dollar(5).equals( Money.dollar(6) ));
+		assertFalse(Money.dollar(5).equals( Money.franc(5) ));
+	}
+	
+	@Test
+	public void testSimpleAddition() {
+		Money sum = Money.dollar(5).plus(Money.dollar(5));
+		assertEquals(sum, Money.dollar(10));
 	}
 
 }

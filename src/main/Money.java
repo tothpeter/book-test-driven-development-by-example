@@ -27,4 +27,8 @@ public class Money {
 		Money money = (Money) obj;
 		return money.amount == amount && money.currency.equals(currency);
 	}
+
+	public Money plus(Money addend) {
+		return new Money(amount + addend.amount, currency);
+	}
 }
