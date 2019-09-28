@@ -17,11 +17,16 @@ public class BankTest {
 	}
 	
 	@Test
+	public void testIdentityRate() {		
+		assertEquals(1, new Bank().rate("USD", "USD"));
+	}
+	
+	@Test
 	public void testReduceMoney() {
 		Bank bank = new Bank();
 		Money result = bank.reduce(Money.dollar(5), "USD");
 		
-		assertEquals(Money.dollar(5), result );
+		assertEquals(Money.dollar(5), result);
 	}
 	
 	@Test

@@ -1,18 +1,24 @@
 package main;
 
+import java.util.Hashtable;
+
 public class Bank {
-	public Bank() {
-	}
+	private Hashtable<Pair, Integer> rates = new Hashtable<Pair, Integer>();
+
+	public Bank() {}
 
 	public Money reduce(Expression source, String to) {
 		return source.reduce(this, to);
 	}
 
 	public void addRate(String from, String to, int rate) {
-		
+		rates.put(new Pair(from, to), new Integer(rate));
 	}
-	
+
 	public int rate(String from, String to) {
-		return from.equals("CHF") ? 2 : 1;
+		if(from.equals(to)) return 1;
+
+		Integer rate = rates.get(new Pair(from, to));
+		return rate.intValue();
 	}
 }
