@@ -1,0 +1,5 @@
+/bin/
+
+# Maven
+log/
+target/
