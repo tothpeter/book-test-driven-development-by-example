@@ -1,6 +1,6 @@
 package main;
 
-public class Money {
+public class Money implements Expression {
 	private int amount;
 	
 	String currency;
@@ -28,7 +28,7 @@ public class Money {
 		return money.amount == amount && money.currency.equals(currency);
 	}
 
-	public Money plus(Money addend) {
+	public Expression plus(Money addend) {
 		return new Money(amount + addend.amount, currency);
 	}
 }
