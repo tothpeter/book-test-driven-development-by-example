@@ -1,10 +1,4 @@
-class TestCase:
-    def __init__(self, name):
-        self.name = name
-
-    def run(self):
-        method = getattr(self, self.name)
-        method()
+from test_case import *
 
 class WasRun(TestCase):
     def __init__(self, name):
