@@ -10,6 +10,9 @@ class WasRun(TestCase):
     def testMethod(self):
         self.log = self.log + 'testMethod '
 
+    def testBrokenMethod(arg):
+        raise Exception
+
 class TestCaseTest(TestCase):
     def testTemplateMethod(self):
         test = WasRun('testMethod')
@@ -21,5 +24,18 @@ class TestCaseTest(TestCase):
         result = test.run()
         assert(result.summary() == '1 run, 0 failed')
 
+    def testFailedResultFormatting(self):
+        result = TestResult()
+        result.testStarted()
+        result.testFailed()
+        assert(result.summary() == '1 run, 1 failed')
+
+    def testFailedResult(self):
+        test = WasRun('testBrokenMethod')
+        result = test.run()
+        assert(result.summary() == '1 run, 1 failed')
+
 TestCaseTest('testTemplateMethod').run()
 TestCaseTest('testResult').run()
+TestCaseTest('testFailedResultFormatting').run()
+TestCaseTest('testFailedResult').run()
