@@ -15,37 +15,35 @@ class WasRun(TestCase):
         raise Exception
 
 class TestCaseTest(TestCase):
+    def setUp(self):
+        self.result = TestResult()
+
     def testTemplateMethod(self):
-        result = TestResult()
         test = WasRun('testMethod')
-        test.run(result)
+        test.run(self.result)
         assert(test.log == 'setUp testMethod tearDown ')
 
     def testResult(self):
-        result = TestResult()
         test = WasRun('testMethod')
-        test.run(result)
-        assert(result.summary() == '1 run, 0 failed')
+        test.run(self.result)
+        assert(self.result.summary() == '1 run, 0 failed')
 
     def testFailedResultFormatting(self):
-        result = TestResult()
-        result.testStarted()
-        result.testFailed()
-        assert(result.summary() == '1 run, 1 failed')
+        self.result.testStarted()
+        self.result.testFailed()
+        assert(self.result.summary() == '1 run, 1 failed')
 
     def testFailedResult(self):
-        result = TestResult()
         test = WasRun('testBrokenMethod')
-        test.run(result)
-        assert(result.summary() == '1 run, 1 failed')
+        test.run(self.result)
+        assert(self.result.summary() == '1 run, 1 failed')
 
     def testSuite(self):
         suite = TestSuite()
         suite.add(WasRun('testMethod'))
         suite.add(WasRun('testBrokenMethod'))
-        result = TestResult()
-        suite.run(result)
-        assert(result.summary() == '2 run, 1 failed')
+        suite.run(self.result)
+        assert(self.result.summary() == '2 run, 1 failed')
 
 suite = TestSuite()
 
